@@ -1,57 +1,53 @@
-var SoftPhoneTool = (function () {
+/**
+ * upgrade from original jQuery version. total 3 versions:
+ * - jQuery
+ * - Angular V1
+ * - React
+ */
 
-    var timer = 0;
-    var isPaused = false;
+let timer = 0;
+let isPaused = false;
 
-    function timeCalculater(displayAt) {
+export const timeCalculater = () => {
 
-        if ($(displayAt).length === 0) {
-            return;
-        }
-        var seconds, minutes, hours, divider, currentTimeString;
-        seconds = minutes = hours = currentTimeString = 0;
-        divider = 60;
+    let seconds, minutes, hours, divider = 60, currentTimeString;
+    seconds = minutes = hours = currentTimeString = 0;
 
-        timer = setInterval(function () {
+    const displayAt = document.querySelector('.timer');
 
-            if (!isPaused) {
-                seconds++;
-                minutes += Math.floor(seconds / divider);
-                hours += Math.floor(minutes / divider);
-                if (seconds % divider === 0) {
-                    seconds = 0;
-                }
-                if (minutes % divider === 0) {
-                    minutes = 0;
-                }
+    timer = setInterval(() => {
 
-                seconds = seconds.toString().length === 1 ? '0' + seconds : seconds;
-
-                currentTimeString = [
-                    hours ? (hours + ":") : '',
-                    minutes ? (minutes + ":") : '',
-                    seconds
-                ].join('');
-
-                //console.log(currentTimeString);
-                $(displayAt).html(currentTimeString);
+        if (!isPaused) {
+            seconds++;
+            minutes += Math.floor(seconds / divider);
+            hours += Math.floor(minutes / divider);
+            if (seconds % divider === 0) {
+                seconds = 0;
             }
-        }, 1000);
-    };
+            if (minutes % divider === 0) {
+                minutes = 0;
+            }
 
-    function stopTimer(displayAt) {
-        displayAt = displayAt || 'span.timer';
-        clearInterval(timer);
-        $(displayAt).html('');
-    }
+            seconds = seconds.toString().length === 1 ? '0' + seconds : seconds;
 
-    function pauseTimer(flag) {
-        isPaused = flag;
-    }
+            currentTimeString = [
+                hours ? (hours + ":") : '',
+                minutes ? (minutes + ":") : '',
+                seconds
+            ].join('');
 
-    return {
-        timeCalculater: timeCalculater,
-        stopTimer: stopTimer,
-        pauseTimer: pauseTimer
-    }
-})();
+            displayAt.innerHTML = currentTimeString;
+        }
+    }, 1000);
+};
+
+export const stopTimer = () => {
+    clearInterval(timer);
+
+    const displayAt = document.querySelector('.timer');
+    displayAt.innerHTML = '';
+};
+
+export const pauseTimer = flag => {
+    isPaused = flag;
+};

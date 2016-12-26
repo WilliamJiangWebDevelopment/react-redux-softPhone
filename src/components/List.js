@@ -1,11 +1,12 @@
 import React from 'react';
 
-const DialList = React.createClass({
+export default class DialList extends React.Component {
+
     render() {
         return (
-            <div>This is a list</div>
+            <div className="container-fluid">
+                <h2>This is a list</h2>
+            </div>
         )
     }
-});
-
-export default DialList;
+};
