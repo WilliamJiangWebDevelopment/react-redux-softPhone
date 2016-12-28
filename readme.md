@@ -17,11 +17,12 @@ Then run `npm start` and open <localhost:7777> in your browser.
 - add favicon.ico (image/x-icon)
 - .gitignore: idea/
 - twitter-bootstrap: npm install react-bootstrap --save
-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+- link  href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
 - mv main.css main.styl
 - add .babelrc: react, es6
-- $ npm i --save babel-preset-es2015 babel-preset-react
-- 
+- npm i --save babel-preset-es2015 babel-preset-react
+- add and integrate more, more
+- continue improving
 
 
 ### Counter
