@@ -1,9 +1,11 @@
-import React from 'react';
-
 /**
  * William Changed from:
  * http://stackoverflow.com/questions/21285923/reactjs-two-components-communicating
+ * parent-children communication
  */
+
+import React from 'react';
+
 const monthsLength = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const MONTHS_ARR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -160,10 +162,10 @@ class List extends React.Component {
     render() {
         let content;
         if (this.props.items.length > 0) {
-            const items = this.props.items.map(function (item) {
+            const res = this.props.items.map(function (item) {
                 return <li key={item}>{item}</li>;
             });
-            content = <ul>{items}</ul>
+            content = <ul>{res}</ul>
         } else {
             content = <p>No items matching this filter</p>;
         }
@@ -194,10 +196,10 @@ class ListContainer extends React.Component {
     }
 
     render() {
-        var displayedItems = this.state.listItems.filter(function (item) {
-            var match = item.toLowerCase().indexOf(this.state.nameFilter.toLowerCase());
-            return (match !== -1);
-        }.bind(this));
+        let searched = this.state.nameFilter.toLocaleLowerCase();
+        const displayedItems = this.state.listItems.filter(function (item) {
+            return item.toLowerCase().indexOf(searched) !== -1;
+        });
 
         return (
             <div>

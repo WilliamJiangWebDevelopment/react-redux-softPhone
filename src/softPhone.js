@@ -1,11 +1,12 @@
 import React from 'react';
-
 import { render } from 'react-dom';
 
 // Import css
 import css from './styles/main.css'
 
-import App from './components/App';
+import PhoneApp from './containers/PhoneApp';
+import CounterApp from './containers/CounterApp'
+import TodoApp from './containers/TodoApp'
 
 import Dial from './components/Dial.js';
 import DialList from './components/List.js';
@@ -21,10 +22,12 @@ import store, { history } from './store.js';
 const router = (
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
+            <Route path="/" component={PhoneApp}>
                 <IndexRoute component={Dial}></IndexRoute>
                 <Route path="/list" component={DialList}></Route>
+                <Route path="/counter" component={CounterApp}></Route>
                 <Route path="/datecity" component={DateCity}></Route>
+                <Route path="/todomvc" component={TodoApp}></Route>
             </Route>
         </Router>
     </Provider>

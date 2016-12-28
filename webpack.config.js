@@ -24,8 +24,16 @@ module.exports = {
             {
                 test: /\.js$/,
                 loaders: ['babel-loader'],
-                presets: ['es2015', 'react'],
+                presets: ['es2015', 'stage-0', 'react'],
                 include: path.join(__dirname, 'src')
+            },
+            {
+                test: /\.jsx$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['react', 'stage-0', 'es2015']
+                }
             },
             // CSS
             {

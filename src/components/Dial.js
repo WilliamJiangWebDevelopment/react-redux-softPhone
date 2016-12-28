@@ -3,35 +3,24 @@ import React from 'react';
 import DialButton from './dialButton';
 import DialPad from './dialPad';
 import DialCtrl from './dialControl';
+import status from '../constants/status'
 
 export default class Dial extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            status: this.props.status
+            status: status
         };
-    }
-
-    callControlClick() {
-        console.log('callControlClick from Dial, not dialControl', this);
     }
 
     /**
      * use Angular version to upgrade <input value=... /> when click the dialPad
      */
-
-    _phoneNumber(number, reset) {
-        var phone = document.querySelector('input[type="tel"]');
-        if (reset) {
-            phone.value = '';
-            return;
-        }
-        if (number && number.toString().length >= 10) {
-            return phone.value = number;
-        }
-
+    _phoneNumber(number) {
+        let phone = document.querySelector('input[type="tel"]');
         var val = phone.value;
+
         if (number || number === 0) {
             if (!val) {
                 val = '+1 (';
@@ -53,12 +42,46 @@ export default class Dial extends React.Component {
             phone.value = val;
         }
         return val;
-    };
+    }
 
-    dialPadClick(evt) {
-        evt.preventDefault();
-        let no = parseInt(evt.currentTarget.textContent);
+    _phoneCheck() {
+        let val = this._phoneNumber();
+        val = val.replace(/[\(\)\s\-\+]+/g, '').replace(/^1/, '');
+
+        if (/\b\d{10}\b/.test(val)) {
+            //TODO: $scope._phoneValid(true);
+            this.setState({
+                phoneStatus: this.props.status['ready']
+            });
+            this.state.dials.push(val);
+            return true;
+        }
+        else {
+            this.setState({
+                phoneStatus: this.props.status['invalid']
+            });
+            //TODO: $scope._phoneValid(false);
+            return false;
+        }
+    }
+
+    dialInputPhoneNumber(no) {
         this._phoneNumber(no);
+    }
+
+    dialPadPhoneNumber(no) {
+        this._phoneNumber(no);
+    }
+
+    dialCtrlPhoneNumber(ctrl) {
+        switch (ctrl) {
+            case 'mute':
+            case 'hold':
+                console.log(ctrl);
+                break;
+            case 'redial':
+                console.log(ctrl);
+        }
     }
 
     render() {
@@ -68,14 +91,15 @@ export default class Dial extends React.Component {
                 <DialButton
                     list={this.props.list}
                     status={this.state.status}
+                    dialInputPhoneNumber={this.dialInputPhoneNumber.bind(this)}
                     ></DialButton>
 
                 <DialPad status={this.state.status}
-                         dialPadClick={this.dialPadClick.bind(this)}
+                         dialPadPhoneNumber={this.dialPadPhoneNumber.bind(this)}
                     ></DialPad>
 
                 <DialCtrl status={this.state.status}
-                          callControlClick={this.callControlClick.bind(this)}
+                          dialCtrlPhoneNumber={this.dialCtrlPhoneNumber.bind(this)}
                     ></DialCtrl>
             </div>
         );

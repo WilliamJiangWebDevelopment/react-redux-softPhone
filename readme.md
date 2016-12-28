@@ -22,3 +22,10 @@ Then run `npm start` and open <localhost:7777> in your browser.
 - add .babelrc: react, es6
 - $ npm i --save babel-preset-es2015 babel-preset-react
 - 
+
+
+### Counter
+
+- From Redux git repository https://github.com/reactjs/redux/tree/master/examples/counter
+- Add to current softPhone App
+- copy counter/reducers/index.js to reducers/index.js: counter()

@@ -29,7 +29,8 @@ export default class DialButton extends React.Component {
     }
 
     validateInput(phone) {
-        return phone && (/^[0-9\(\)\-\s]+$/.test(phone));
+        //return phone && (/^[0-9\(\)\-\s]+$/.test(phone));
+        return !isNaN(phone) && phone.length===10;
     }
 
     //document.querySelector(".section-name").classList.contains("section-filter")
@@ -78,6 +79,16 @@ export default class DialButton extends React.Component {
         return false;
     }
 
+    handleKeyPress(evt) {
+        evt.preventDefault();
+        let no = String.fromCharCode(evt.charCode);
+        if (isNaN(no)) {
+            console.info('not a number: ', no, evt.charCode);
+            return false;
+        }
+        this.props.dialInputPhoneNumber(no);
+    }
+
     render() {
         return (
             <div className="row">
@@ -87,7 +98,8 @@ export default class DialButton extends React.Component {
                         <div className="row">
                             <div className="form-group">
                                 <input type="tel" className="form-control phoneNumber input-lg"
-                                       placeholder="Enter number" ref="dialInput"/>
+                                       placeholder="Enter number" ref="dialInput"
+                                       onKeyPress={this.handleKeyPress.bind(this)}/>
                             </div>
                         </div>
                         <div className="row status">
@@ -117,12 +129,12 @@ export default class DialButton extends React.Component {
     }
 
     componentDidMount() {
+        setTimeout(() => {
+            this.setState({'phoneStatus': this.props.status['ready']})
+        }, 1000);
+
         // This also works:
         //setTimeout(this.setState.bind(this,
         // {'phoneStatus': this.props.status['ready']}), 1000);
-
-        setTimeout(() => {
-            this.setState({'phoneStatus': this.props.status['ready']})
-        }, 1000)
     }
 }
