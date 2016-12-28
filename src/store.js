@@ -10,7 +10,7 @@ import phoneList from './data/phoneList'
 
 
 const defaultState = {
-    phone: phoneList
+    phones: phoneList
 };
 
 const enhancers = compose(

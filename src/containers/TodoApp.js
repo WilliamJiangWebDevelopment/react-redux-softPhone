@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as TodoActions from '../actions'
+import * as TodoActions from '../actions/TodoMVC'
 import Header from '../components/todomvc/Header'
 import MainSection from '../components/todomvc/MainSection'
 

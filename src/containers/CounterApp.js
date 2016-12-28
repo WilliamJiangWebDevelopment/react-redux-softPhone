@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as actionCreator from '../actions/'
-import Counter from '../components/Counter.js';
+import * as actionCreator from '../actions/CounterAction'
+import Counter from '../components/Counter';
 
 class CounterApp extends Component {
     render() {
@@ -24,7 +24,7 @@ class CounterApp extends Component {
 }
 
 const mapStateToProps = (state) => ({
-        value: state.counter
+        value: state.counters
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -34,6 +34,6 @@ const mapDispatchToProps = (dispatch) => {
 //also work: connect(mapStateToProps)(CounterApp);
 export default connect(
     (state) => ({
-        value: state.counter
+        value: state.counters
     })
 )(CounterApp);

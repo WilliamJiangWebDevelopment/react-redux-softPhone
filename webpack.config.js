@@ -7,7 +7,7 @@ module.exports = {
     url: 'http://localhost:7777',
     entry: [
         'webpack-hot-middleware/client',
-        './src/softPhone'
+        './src/index'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -47,6 +47,10 @@ module.exports = {
                     path.resolve(__dirname, 'src/styles')
                 ],
                 loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.scss/,
+                loader: 'style-loader!css-loader!sass-loader'
             }
         ]
     }

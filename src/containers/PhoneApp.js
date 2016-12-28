@@ -1,11 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../actions/';
-import Main from './../components/Main.js';
+import * as actionCreators from '../actions/PhoneAction';
+import Main from './../components/Main';
 
 const mapStateToProps = (state) => ({
-    list: state.phone
+    phones: state.phones,
+    status: state.status
 })
 
 /**

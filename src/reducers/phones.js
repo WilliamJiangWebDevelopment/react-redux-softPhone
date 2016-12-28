@@ -3,7 +3,7 @@ const initialState = [
     '3478221246', '6043895635', '6668889999'
 ]
 
-const phone = (state = initialState, action = {}) => {
+const phones = (state = initialState, action = {}) => {
     switch (action.type) {
         case 'ADD_PHONE':
             return [
@@ -20,5 +20,5 @@ const phone = (state = initialState, action = {}) => {
     return state;
 }
 
-export default phone;
+export default phones;
 

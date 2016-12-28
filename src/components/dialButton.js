@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {timeCalculater, stopTimer, pauseTimer} from '../tools.js';
+import {timeCalculater, stopTimer, pauseTimer} from '../tools/timeDisplay';
 
 export default class DialButton extends React.Component {
 
